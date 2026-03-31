@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BJJ — Mon Jeu</title>
+<title>BJJ — My Game</title>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -44,6 +44,8 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(
 .n-sub{border-color:#ff4d5e77;background:#231018}
 .n-sweep{border-color:#ffd54f66;background:#231e0a}
 .n-td{border-color:#ffd54f66;background:#231e0a}
+.n-key{width:240px;border-width:2px;border-color:#5b9fff;background:#0f1a2e;box-shadow:0 0 0 2px #5b9fff44, 0 0 28px #5b9fff55, 0 0 60px #5b9fff18;animation:keyPulse 2.5s ease-in-out infinite;}
+@keyframes keyPulse{0%,100%{box-shadow:0 0 0 2px #5b9fff44, 0 0 28px #5b9fff55, 0 0 60px #5b9fff18;}50%{box-shadow:0 0 0 2px #5b9fff88, 0 0 36px #5b9fff99, 0 0 80px #5b9fff33;}}
 .nt{font-size:9px;letter-spacing:.15em;text-transform:uppercase;margin-bottom:5px;font-weight:400;opacity:.7}
 .nn{font-size:13px;font-weight:500;color:#f0f2ff;line-height:1.25}
 .ns{font-size:10px;color:#8892b0;margin-top:4px;font-weight:300}
@@ -89,7 +91,7 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(
 </head>
 <body>
 <div id="hdr">
-  <span class="logo">Mon Jeu <em>// BJJ</em></span>
+  <span class="logo">My Game <em>// BJJ</em></span>
   <div id="controls">
     <span id="zlabel">100%</span>
     <button class="cbtn" onclick="zoomTo(1)">1:1</button>
@@ -113,18 +115,27 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(
   <div id="pb">
     <div class="psec" id="s-vid"><div class="vwrap" id="p-vid"></div></div>
     <div class="psec" id="s-not"><div class="pnotes" id="p-not"></div></div>
-    <div class="psec" id="s-con"><div class="psl">Enchaînements</div><div class="clist" id="p-con"></div></div>
+    <div class="psec" id="s-con"><div class="psl">Connections</div><div class="clist" id="p-con"></div></div>
   </div>
 </div>
-<div id="toast">Scroll = zoom &nbsp;·&nbsp; Drag = déplacer &nbsp;·&nbsp; Clic = détails</div>
+<div id="toast">Scroll = zoom &nbsp;·&nbsp; Drag = move &nbsp;·&nbsp; Click = details</div>
 <script>
 const D={
-  hg:{title:'Demi-Garde',type:'POSITION',sub:'Half Guard',cls:'n-root',badge:'bb',bl:'Point de départ',notes:`→ Récupérer le underhook\n→ Shield genou haut\n→ Ne jamais rester à plat`,yt:''},
+  hg:{title:'HALF GUARD',type:'POSITION',sub:'Bottom position — start here',cls:'n-key',badge:'bb',bl:'Home base',notes:`KNEE SHIELD — How to protect it\n→ Keep your top knee pointing toward his chest at all times\n→ Frame with your bottom arm on his hip — don't let him close the distance\n→ If he tries to flatten you : hip escape away + re-establish the frame\n→ Never let your knee drop — that's when he passes`,yt:'',local:'C:/Users/arnau/Documents/SECOND BRAIN/DATA/20250919-1641-56.6941482.mp4'},
+  atk_root:{title:'ATTACK',type:'BLOCK',sub:'Offensive game',cls:'n-atk',badge:'bg',bl:'Attack',notes:'All attacking options from Half Guard.',yt:''},
+  mebtouche:{title:'MEBTOUCHE DEEP',type:'POSITION',sub:'',cls:'n-pos',badge:'bb',bl:'Position',notes:'',yt:''},
+  uh_cleared:{title:'UNDERHOOK CLEARED',type:'SITUATION',sub:'He removes your underhook',cls:'n-fail',badge:'br',bl:'React now',notes:`He's removed your underhook — his weight is on you.\n\n→ Don't freeze — his position is also exposed\n→ Two options depending on how he reacts`,yt:''},
+  def_root:{title:'DEFENSE',type:'BLOCK',sub:'Defensive game',cls:'n-def',badge:'br',bl:'Defense',notes:'All defensive options from Half Guard.',yt:''},
   atk_uh:{title:'Prendre le Underhook',type:'ATTAQUE',sub:'1ère priorité',cls:'n-atk',badge:'bg',bl:'Attaque',notes:`Pomper le coude vers le bas, épaule collée.\n\n→ Il lève le bras : entre immédiatement\n→ Il change de base : exploite le shift`,yt:''},
   def_press:{title:'Gérer la Pression',type:'DÉFENSE',sub:'Il te plaque',cls:'n-def',badge:'br',bl:'Défense',notes:`Frame coude sur sa hanche.\nHip escape vers le bas.\nCréer l'espace pour le underhook.`,yt:''},
-  uh_ok:{title:'Underhook Obtenu ✓',type:'SUCCÈS',sub:'Espace créé',cls:'n-ok',badge:'bg',bl:'Ça passe',notes:`→ Il reste neutre : Dog Fight\n→ Il baisse la tête : Darce\n→ Tu peux rouler : Octopus`,yt:''},
-  uh_fail:{title:'Underhook Bloqué ✗',type:'ÉCHEC',sub:'Son coude bloque',cls:'n-fail',badge:'br',bl:'Ça passe pas',notes:`→ Sa hanche haute : John Wayne\n→ Sa jambe accessible : Scorpion Dagger\n→ Sa main au sol : Wristlock`,yt:''},
-  dog:{title:'Dog Fight',type:'POSITION',sub:'4 pattes, face à face',cls:'n-pos',badge:'bb',bl:'Position clé',notes:`JAMAIS statique ici.\n\n→ Son poids en avant : Knee Pick\n→ Angle libre : Bodylock\n→ Il recule : Reverse\n→ Il contrôle tout : Octopus`,yt:''},
+  uh_ok:{title:'UNDERHOOK ✓',type:'SUCCESS',sub:'Space created',cls:'n-ok',badge:'bg',bl:'Works',notes:`Underhook secured — now attack.\n\n→ He stays neutral : Dog Fight\n→ He leans forward : Mebtouche Deep`,yt:''},
+  uh_fail:{title:'UNDERHOOK ✗',type:'FAIL',sub:'He clears your hook',cls:'n-fail',badge:'br',bl:'Blocked',notes:`He removed your underhook — react immediately.\n\n→ His hip exposed : John Wayne\n→ He flattens you : Scorpion Dagger`,yt:''},
+  dog:{title:'DOG FIGHT',type:'POSITION',sub:'4-point — face to face',cls:'n-pos',badge:'bb',bl:'Key position',notes:`NEVER stay static here.\n\n→ His weight forward : Knee Pick\n→ Angle available : Body Lock Anil\n→ He backs up : Reverse`,yt:''},
+  bodylock_anil:{title:'BODY LOCK ANIL',type:'POSITION',sub:'From Dog Fight',cls:'n-pos',badge:'bb',bl:'Position',notes:'',yt:''},
+  headquarters:{title:'100 KILOS',type:'POSITION',sub:'Headquarters / Smash position',cls:'n-key',badge:'bb',bl:'Top control',notes:'',yt:''},
+  hq_atk:{title:'ATTACK',type:'BLOCK',sub:'From top 100 kilos',cls:'n-atk',badge:'bg',bl:'Attack',notes:'',yt:''},
+  hq_def:{title:'DEFENSE',type:'BLOCK',sub:'He tries to escape',cls:'n-def',badge:'br',bl:'Defense',notes:'',yt:''},
+  reverse:{title:'REVERSE',type:'SWEEP',sub:'From Dog Fight',cls:'n-sweep',badge:'by',bl:'Sweep',notes:'',yt:''},
   knee:{title:'Knee Pick',type:'TAKEDOWN',sub:'Son poids en avant',cls:'n-td',badge:'by',bl:'Takedown',notes:`Main sur son genou, autre main drive l'épaule.\nTirer bas et horizontal.\n→ Finish Side Control`,yt:''},
   bodylock:{title:'Bodylock Axel',type:'POSITION',sub:'Angle disponible',cls:'n-pos',badge:'bb',bl:'Position',notes:`Ceinturer son tronc par derrière.\nS-grip ou Gable grip, coudes rentrés.\n→ Toma`,yt:''},
   dog_rev:{title:'Reverse',type:'SWEEP',sub:'Il recule fort',cls:'n-sweep',badge:'by',bl:'Sweep',notes:`Hip escape vers l'arrière.\nUtiliser son énergie pour sweeper.`,yt:''},
@@ -132,8 +143,11 @@ const D={
   toma:{title:'Toma',type:'PROJECTION',sub:'Depuis le Bodylock',cls:'n-pos',badge:'bb',bl:'Projection',notes:`Déséquilibre latéral + sweep des jambes.\nNe pas lâcher le grip.\n\n→ Yoko Sankaku\n→ Ankur PCC`,yt:''},
   yoko:{title:'Yoko Sankaku',type:'SOUMISSION',sub:'Sa jambe entre les tiennes',cls:'n-sub',badge:'br',bl:'Soumission',notes:`Corps perpendiculaire — pas parallèle.\nJambe de triangle sur son épaule.\nSerrer les genoux.`,yt:''},
   ankur:{title:'Ankur PCC',type:'SOUMISSION',sub:'Sa jambe libre',cls:'n-sub',badge:'br',bl:'Soumission',notes:`Contrôle de la cheville.\nPivoter en outside.\nCalf crush ou heel hook.`,yt:''},
-  jw:{title:'John Wayne Sweep',type:'SWEEP',sub:'Sa hanche exposée',cls:'n-sweep',badge:'by',bl:'Sweep',notes:`Crochet du bras libre sur son bras.\nHip escape simultané.\nUtiliser son énergie.`,yt:''},
-  scorp:{title:'Scorpion Dagger',type:'SOUMISSION',sub:'Sa jambe accessible',cls:'n-sub',badge:'br',bl:'Soumission',notes:`Contrôle du talon en premier.\nOutside heel hook setup.\nRotation des hanches pour finir.`,yt:''},
+  jw:{title:'JOHN WAYNE',type:'SWEEP',sub:'His hip is exposed',cls:'n-sweep',badge:'by',bl:'Sweep',notes:`He cleared your underhook — his hip is now exposed.\n\n→ 1. Hook his arm with your free arm\n→ 2. Hip escape simultaneously (away from him)\n→ 3. Use his energy — don't muscle it\n→ 4. Finish on top\n\n⚠ The hip escape and the arm hook happen at the same time.\n⚠ Works best when he's heavy on you trying to flatten.`,yt:'',local:'C:/Users/arnau/Documents/SECOND BRAIN/DATA/20251224-0714-10.7894457.mp4'},
+  scorp:{title:'SCORPION DAGGER',type:'BACK TAKE',sub:'Attack fails → counter',cls:'n-pos',badge:'bb',bl:'Back take',notes:`He cleared your underhook and is trying to flatten you.\n\n→ 1. Don't resist — let your knee shield (left leg) swing OVER his right leg\n→ 2. Left foot hooks his foot from the outside\n→ 3. Extend the leg to lock — don't let his foot escape\n→ 4. Right hand grabs his heel\n→ 5. Rotate onto your belly (turn right) → outside heel hook\n\n⚠ The shield leg going OVER and hooking the foot is the key move.\n⚠ Extend before you rotate — if you rotate too early he slips out.\n\n📌 Danaher version (to develop later) : outside ashi garami + heel in the crook of the elbow`,yt:'',locals:[
+    {src:'C:/Users/arnau/Documents/SECOND BRAIN/DATA/20251223-0728-20.0125176.mp4',label:'1 — Leg lock',end:5},
+    {src:'C:/Users/arnau/Documents/SECOND BRAIN/DATA/20251223-0731-09.7358341.mp4',label:'2 — Back take (Scorpion)'},
+  ]},
   fifty:{title:'Fifty Cent Knee',type:'SWEEP',sub:'Il charge',cls:'n-sweep',badge:'by',bl:'Sweep',notes:`Tirer le genou dans son mouvement.\nHip escape simultané.\nSon énergie fait le sweep.`,yt:''},
   hipbump:{title:'Octopus Hip Bump',type:'SWEEP',sub:'Il est haut',cls:'n-sweep',badge:'by',bl:'Sweep',notes:`Explosion des hanches vers haut-côté.\nUtiliser le contrôle d'aisselle.\nSuivre la rotation → top.`,yt:''},
   deephg:{title:'Deep Half Guard',type:'POSITION',sub:'Version Sylvain',cls:'n-pos',badge:'bb',bl:'Position',notes:`Tête sous sa hanche — obligatoire.\nContrôle genou + cheville.\n\n→ Sweep classique\n→ Soumission directe`,yt:''},
@@ -141,19 +155,25 @@ const D={
 };
 
 const TREE={id:'hg',children:[
-  {id:'atk_uh',conn:'atk',split:1,children:[
-    {id:'uh_ok',conn:'ok',children:[
-      {id:'dog',conn:'neutral',split:1,children:[
-        {id:'knee',conn:'atk'},
-        {id:'bodylock',conn:'atk',children:[{id:'toma',conn:'neutral',children:[{id:'yoko',conn:'ok'},{id:'ankur',conn:'ok'}]}]},
-        {id:'dog_rev',conn:'atk'},
-        {id:'oct',conn:'def',children:[{id:'fifty',conn:'atk'},{id:'hipbump',conn:'atk'}]},
+  {id:'atk_root',conn:'atk',split:1,children:[
+    {id:'uh_ok',conn:'ok',split:0,children:[
+      {id:'dog',conn:'atk',children:[
+        {id:'bodylock_anil',conn:'atk',children:[
+        {id:'headquarters',conn:'atk',split:1,children:[
+          {id:'hq_atk',conn:'atk',children:[]},
+          {id:'hq_def',conn:'def',children:[]},
+        ]},
       ]},
-      {id:'darce',conn:'atk'},
+        {id:'reverse',conn:'atk',children:[]},
+      ]},
+      {id:'mebtouche',conn:'atk',children:[]},
     ]},
-    {id:'uh_fail',conn:'fail',children:[{id:'jw',conn:'atk'},{id:'scorp',conn:'atk'}]},
+    {id:'uh_fail',conn:'fail',split:0,children:[
+      {id:'scorp',conn:'atk',children:[]},
+      {id:'jw',conn:'atk',children:[]},
+    ]},
   ]},
-  {id:'def_press',conn:'def',children:[{id:'deephg',conn:'neutral'}]},
+  {id:'def_root',conn:'def',split:0,children:[]},
 ]};
 
 const NW=200,NH=78,HG=40,VG=90;
@@ -272,7 +292,8 @@ function mkNode(n){
   const d=D[n.id];if(!d)return;
   const el=document.createElement('div');
   el.className='node '+d.cls;el.id='nd-'+n.id;el.dataset.id=n.id;
-  el.innerHTML=`<div class="nt">${d.type}</div><div class="nn">${d.title}</div>${d.sub?`<div class="ns">${d.sub}</div>`:''}<div class="nb ${d.badge}">${d.bl}</div>`;
+  const isPos=(d.cls==='n-pos'||d.cls==='n-root');
+  el.innerHTML=`<div style="display:flex;align-items:center;justify-content:space-between"><div class="nt">${d.type}</div>${isPos?`<div style="font-size:8px;letter-spacing:.12em;padding:2px 6px;border-radius:3px;background:#5b9fff22;color:#5b9fff;border:1px solid #5b9fff55;font-weight:600">POSITION</div>`:''}</div><div class="nn">${d.title}</div>${d.sub?`<div class="ns">${d.sub}</div>`:''}<div class="nb ${d.badge}">${d.bl}</div>`;
   el.style.left=n._x+'px';el.style.top=n._y+'px';
   el.addEventListener('mousedown',e=>{e.stopPropagation();});
   el.addEventListener('click',e=>{e.stopPropagation();openPanel(n.id);});
@@ -283,7 +304,7 @@ function mkTags(n){
   if(!n.split||(n.children||[]).length===0)return;
   const ac=(n.children||[]).find(c=>c.conn==='atk'||c.conn==='ok');
   const dc=(n.children||[]).find(c=>c.conn==='def'||c.conn==='fail');
-  [ac&&['sa','ATTAQUE'],dc&&['sd','DÉFENSE']].filter(Boolean).forEach(([cls,txt])=>{
+  [ac&&['sa','ATTACK'],dc&&['sd','DEFENSE']].filter(Boolean).forEach(([cls,txt])=>{
     const ch=cls==='sa'?ac:dc;
     const el=document.createElement('div');
     el.className='stag '+cls;el.textContent=txt;
@@ -309,9 +330,28 @@ function openPanel(id){
   document.getElementById('p-title').textContent=d.title;
   document.getElementById('p-sub').textContent=d.sub||'';
   const sv=document.getElementById('s-vid'),vEl=document.getElementById('p-vid');
-  vEl.innerHTML='';
-  if(d.yt){const m=d.yt.match(/(?:v=|youtu\.be\/|embed\/)([a-zA-Z0-9_-]{11})/);if(m){vEl.innerHTML=`<iframe src="https://www.youtube.com/embed/${m[1]}?rel=0&modestbranding=1" allowfullscreen></iframe>`;}}
-  else{vEl.innerHTML=`<div class="vph"><div class="vi">▷</div><div>Pas encore de vidéo</div></div>`;}
+  sv.style.display='block';
+  if(d.locals&&d.locals.length){
+    vEl.style.position='static';vEl.style.paddingBottom='0';vEl.style.background='none';vEl.style.border='none';
+    vEl.innerHTML=d.locals.map((v,i)=>`
+      <div style="margin-bottom:12px">
+        <div style="font-size:9px;letter-spacing:.12em;color:var(--muted);margin-bottom:5px;text-transform:uppercase">${v.label}</div>
+        <div style="position:relative;width:100%;padding-bottom:56.25%;background:#111828;border-radius:8px;overflow:hidden;border:1px solid var(--b2)">
+          <video id="vid-${i}" src="${v.src}" controls style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#000"></video>
+        </div>
+      </div>`).join('');
+    d.locals.forEach((v,i)=>{if(v.end){const el=document.getElementById('vid-'+i);if(el){el.addEventListener('timeupdate',()=>{if(el.currentTime>=v.end){el.pause();el.currentTime=v.end;}});}}});
+  } else if(d.local){
+    vEl.style.position='relative';vEl.style.paddingBottom='56.25%';
+    vEl.innerHTML=`<video src="${d.local}" controls style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#000;border-radius:8px"></video>`;
+  } else if(d.yt){
+    vEl.style.position='relative';vEl.style.paddingBottom='56.25%';
+    const m=d.yt.match(/(?:v=|youtu\.be\/|embed\/)([a-zA-Z0-9_-]{11})/);
+    if(m){vEl.innerHTML=`<iframe src="https://www.youtube.com/embed/${m[1]}?rel=0&modestbranding=1" allowfullscreen></iframe>`;}
+  } else{
+    vEl.style.position='relative';vEl.style.paddingBottom='56.25%';
+    vEl.innerHTML=`<div class="vph"><div class="vi">▷</div><div>No video yet</div></div>`;
+  }
   const sn=document.getElementById('s-not');
   if(d.notes){document.getElementById('p-not').innerHTML=d.notes.replace(/\*\*(.*?)\*\*/g,'$1').replace(/→ /g,'<span style="color:var(--green)">→ </span>').replace(/\n/g,'<br>');sn.style.display='block';}else sn.style.display='none';
   const sc2=document.getElementById('s-con'),cEl=document.getElementById('p-con');
