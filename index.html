@@ -126,6 +126,7 @@ const D={
   mebtouche:{title:'MEBTOUCHE DEEP',type:'POSITION',sub:'',cls:'n-pos',badge:'bb',bl:'Position',notes:'',yt:''},
   uh_cleared:{title:'UNDERHOOK CLEARED',type:'SITUATION',sub:'He removes your underhook',cls:'n-fail',badge:'br',bl:'React now',notes:`He's removed your underhook — his weight is on you.\n\n→ Don't freeze — his position is also exposed\n→ Two options depending on how he reacts`,yt:''},
   def_root:{title:'DEFENSE',type:'BLOCK',sub:'Defensive game',cls:'n-def',badge:'br',bl:'Defense',notes:'All defensive options from Half Guard.',yt:''},
+  back_escape:{title:'BACK ESCAPE',type:'ESCAPE',sub:'Il a pris ton dos',cls:'n-def',badge:'br',bl:'Escape',notes:`Il a les crochets, son bras passe sous ton aisselle.\n\n→ 1. Saisir son bras à deux mains (poignet + coude)\n→ 2. Passer ta tête EN DESSOUS de son bras\n→ 3. Rotation de l'épaule vers lui\n→ 4. Finish : Garde Fermée\n\n⚠ La tête passe sous — pas par-dessus.\n⚠ Les deux mains contrôlent le bras avant de tourner.`,local:'C:/Users/arnau/Downloads/BACK ESCAPE.mp4'},
   atk_uh:{title:'Prendre le Underhook',type:'ATTAQUE',sub:'1ère priorité',cls:'n-atk',badge:'bg',bl:'Attaque',notes:`Pomper le coude vers le bas, épaule collée.\n\n→ Il lève le bras : entre immédiatement\n→ Il change de base : exploite le shift`,yt:''},
   def_press:{title:'Gérer la Pression',type:'DÉFENSE',sub:'Il te plaque',cls:'n-def',badge:'br',bl:'Défense',notes:`Frame coude sur sa hanche.\nHip escape vers le bas.\nCréer l'espace pour le underhook.`,yt:''},
   uh_ok:{title:'UNDERHOOK ✓',type:'SUCCESS',sub:'Space created',cls:'n-ok',badge:'bg',bl:'Works',notes:`Underhook secured — now attack.\n\n→ He stays neutral : Dog Fight\n→ He leans forward : Mebtouche Deep`,yt:''},
@@ -152,34 +153,75 @@ const D={
   hipbump:{title:'Octopus Hip Bump',type:'SWEEP',sub:'Il est haut',cls:'n-sweep',badge:'by',bl:'Sweep',notes:`Explosion des hanches vers haut-côté.\nUtiliser le contrôle d'aisselle.\nSuivre la rotation → top.`,yt:''},
   deephg:{title:'Deep Half Guard',type:'POSITION',sub:'Version Sylvain',cls:'n-pos',badge:'bb',bl:'Position',notes:`Tête sous sa hanche — obligatoire.\nContrôle genou + cheville.\n\n→ Sweep classique\n→ Soumission directe`,yt:''},
   darce:{title:'Darce Choke',type:'SOUMISSION',sub:'Il baisse la tête',cls:'n-sub',badge:'br',bl:'Soumission',notes:`Fenêtre courte — agir au moment où la tête passe.\nBras d'underhook sous son cou.\nClé de bras simultanée, serrer les épaules.`,yt:''},
+  back_control:{title:'BACK CONTROL',type:'POSITION',sub:'Back mount — key position',cls:'n-key',badge:'bb',bl:'Home base',notes:`Hooks in, seatbelt grip.\n\n→ You have the back : ATTACK\n→ He has your back : DEFENSE`,yt:''},
+  back_atk_root:{title:'ATTACK',type:'BLOCK',sub:'Tu as le dos',cls:'n-atk',badge:'bg',bl:'Attack',notes:'Options offensives depuis la prise de dos.',yt:''},
+  back_def_root:{title:'DEFENSE',type:'BLOCK',sub:'Il a ton dos',cls:'n-def',badge:'br',bl:'Defense',notes:'Options défensives — récupérer la garde.',yt:''},
+  back_escape:{title:'BACK ESCAPE',type:'ESCAPE',sub:'Recover closed guard',cls:'n-def',badge:'br',bl:'Escape',notes:`He has the hooks, his arm passes under your armpit.\n\n→ 1. Grab his arm with both hands (wrist + elbow)\n→ 2. Pass your head UNDER his arm\n→ 3. Rotate your shoulder into him\n→ 4. Finish : Closed Guard\n\n⚠ Head goes under — not over.\n⚠ Both hands control the arm before you rotate.`,local:'C:/Users/arnau/Downloads/BACK ESCAPE.mp4'},
+  kimura_hg:{title:'KIMURA SYSTEM',type:'SYSTEM',sub:'From Half Guard',cls:'n-pos',badge:'bb',bl:'System',notes:`Kimura grip from bottom half guard.\n\nTwo paths depending on his reaction :`,yt:''},
+  kimura_trap:{title:'KIMURA TRAP',type:'SUBMISSION',sub:'He doesn\'t roll',cls:'n-sub',badge:'br',bl:'Submission',notes:`He resists the kimura — use the trap.\n\n→ Keep the grip, pin his arm to the mat\n→ Use his resistance to create the angle\n→ Finish the kimura from the trapped position`,yt:'',local:'C:/Users/arnau/Downloads/KIMURA 1.mp4'},
+  kimura_roll:{title:'KIMURA ROLL',type:'SWEEP',sub:'He tries to pull away',cls:'n-sweep',badge:'by',bl:'Sweep',notes:`He pulls his arm back — follow the energy.\n\n→ Roll toward his trapped arm\n→ Come up on top\n→ Finish kimura from top or transition`,yt:'',local:'C:/Users/arnau/Downloads/KIMURA ROLL.mp4'},
+  turtle:{title:'TURTLE',type:'POSITION',sub:'Defensive shell — key position',cls:'n-key',badge:'bb',bl:'Home base',notes:`Opponent on all fours, head tucked.\n\n→ You're on top : ATTACK\n→ You're in turtle : DEFENSE`,yt:''},
+  turtle_atk_root:{title:'ATTACK',type:'BLOCK',sub:'You are on top',cls:'n-atk',badge:'bg',bl:'Attack',notes:'All attacking options from Top Turtle.',yt:''},
+  turtle_def_root:{title:'DEFENSE',type:'BLOCK',sub:'You are in turtle',cls:'n-def',badge:'br',bl:'Defense',notes:'All defensive options from Turtle.',yt:''},
+  turtle_crucifix:{title:'TOP TURTLE CRUCIFIX',type:'SUBMISSION',sub:'Kimura from top turtle',cls:'n-sub',badge:'br',bl:'Submission',notes:`One arm threads UNDER his armpit.\nOther arm passes OVER his neck.\n→ Kimura grip secured.\n\nRoll over the shoulder to finish.\n\n⚠ The roll is what locks the submission — don't muscle the kimura flat.\n⚠ Control the near arm before threading.`,local:'C:/Users/arnau/Downloads/TURTLE CRUCIFIX.mp4'},
+  cg:{title:'CLOSED GUARD',type:'POSITION',sub:'Bottom position — legs locked',cls:'n-key',badge:'bb',bl:'Home base',notes:`Legs locked around his waist, breaking his posture.\n\n→ He postures up : ATTACK\n→ He passes : DEFENSE`,yt:''},
+  cg_atk_root:{title:'ATTACK',type:'BLOCK',sub:'Offensive game',cls:'n-atk',badge:'bg',bl:'Attack',notes:'All attacking options from Closed Guard.',yt:''},
+  cg_def_root:{title:'DEFENSE',type:'BLOCK',sub:'Defensive game',cls:'n-def',badge:'br',bl:'Defense',notes:'All defensive options from Closed Guard.',yt:''},
 };
 
-const TREE={id:'hg',children:[
-  {id:'atk_root',conn:'atk',split:1,children:[
-    {id:'uh_ok',conn:'ok',split:0,children:[
-      {id:'dog',conn:'atk',children:[
-        {id:'bodylock_anil',conn:'atk',children:[
-        {id:'headquarters',conn:'atk',split:1,children:[
-          {id:'hq_atk',conn:'atk',children:[]},
-          {id:'hq_def',conn:'def',children:[]},
+const LINKS=[
+  {from:'back_escape',to:'cg',conn:'def'},
+];
+
+const TREE=[
+  {id:'hg',children:[
+    {id:'atk_root',conn:'atk',split:1,children:[
+      {id:'kimura_hg',conn:'atk',split:0,children:[
+        {id:'kimura_trap',conn:'atk',children:[]},
+        {id:'kimura_roll',conn:'atk',children:[]},
+      ]},
+      {id:'uh_ok',conn:'ok',split:0,children:[
+        {id:'dog',conn:'atk',children:[
+          {id:'bodylock_anil',conn:'atk',children:[
+            {id:'headquarters',conn:'atk',split:1,children:[
+              {id:'hq_atk',conn:'atk',children:[]},
+              {id:'hq_def',conn:'def',children:[]},
+            ]},
+          ]},
+          {id:'reverse',conn:'atk',children:[]},
         ]},
+        {id:'mebtouche',conn:'atk',children:[]},
       ]},
-        {id:'reverse',conn:'atk',children:[]},
+      {id:'uh_fail',conn:'fail',split:0,children:[
+        {id:'scorp',conn:'atk',children:[]},
+        {id:'jw',conn:'atk',children:[]},
       ]},
-      {id:'mebtouche',conn:'atk',children:[]},
     ]},
-    {id:'uh_fail',conn:'fail',split:0,children:[
-      {id:'scorp',conn:'atk',children:[]},
-      {id:'jw',conn:'atk',children:[]},
+    {id:'def_root',conn:'def',split:0,children:[]},
+  ]},
+  {id:'back_control',children:[
+    {id:'back_atk_root',conn:'atk',split:0,children:[]},
+    {id:'back_def_root',conn:'def',split:0,children:[
+      {id:'back_escape',conn:'def',children:[]},
     ]},
   ]},
-  {id:'def_root',conn:'def',split:0,children:[]},
-]};
+  {id:'turtle',children:[
+    {id:'turtle_atk_root',conn:'atk',split:0,children:[
+      {id:'turtle_crucifix',conn:'atk',children:[]},
+    ]},
+    {id:'turtle_def_root',conn:'def',split:0,children:[]},
+  ]},
+  {id:'cg',children:[
+    {id:'cg_atk_root',conn:'atk',split:0,children:[]},
+    {id:'cg_def_root',conn:'def',split:0,children:[]},
+  ]},
+];
 
-const NW=200,NH=78,HG=40,VG=90;
+const NW=200,NH=78,HG=40,VG=90,TREE_GAP=200;
 function subW(n){const ch=n.children||[];if(!ch.length)return NW;return Math.max(NW,ch.reduce((a,c)=>a+subW(c),0)+(ch.length-1)*HG);}
 function layout(n,d,cx){n._x=cx;n._y=d*(NH+VG)+NH/2;const ch=n.children||[];if(!ch.length)return;const ws=ch.map(c=>subW(c));const tot=ws.reduce((a,b)=>a+b,0)+(ch.length-1)*HG;let x=cx-tot/2;ch.forEach((c,i)=>{layout(c,d+1,x+ws[i]/2);x+=ws[i]+HG;});}
-function flat(n,a=[]){a.push(n);(n.children||[]).forEach(c=>flat(c,a));return a;}
+function layoutForest(trees){let xOff=0;trees.forEach(t=>{const w=subW(t);layout(t,0,xOff+w/2);xOff+=w+TREE_GAP;});}
+function flat(n,a=[]){if(Array.isArray(n)){n.forEach(t=>flat(t,a));return a;}a.push(n);(n.children||[]).forEach(c=>flat(c,a));return a;}
 
 const vp=document.getElementById('vp'),world=document.getElementById('world'),svgl=document.getElementById('svg-l');
 const gridC=document.getElementById('grid'),gc=gridC.getContext('2d');
@@ -366,19 +408,24 @@ function closePanel(){
   const ifr=document.querySelector('#p-vid iframe');if(ifr){const s=ifr.src;ifr.src='';ifr.src=s;}
 }
 function focusNode(n){const W=window.innerWidth,H=window.innerHeight-48;cx=W/2-n._x*cz-180;cy=H/2-n._y*cz;applyT();}
-function findT(n,id){if(n.id===id)return n;for(const c of n.children||[]){const f=findT(c,id);if(f)return f;}return null;}
+function findT(n,id){if(Array.isArray(n)){for(const t of n){const f=findT(t,id);if(f)return f;}return null;}if(n.id===id)return n;for(const c of n.children||[]){const f=findT(c,id);if(f)return f;}return null;}
 
 function init(){
   world.querySelectorAll('.node,.stag').forEach(e=>e.remove());
   svgl.innerHTML='';
-  layout(TREE,0,0);
+  layoutForest(TREE);
   const all=flat(TREE);
   const mnx=Math.min(...all.map(n=>n._x))-NW/2;
   const mxy=Math.max(...all.map(n=>n._y))+NH/2;
   const shift=80-mnx;all.forEach(n=>n._x+=shift);
   const maxX=Math.max(...all.map(n=>n._x))+NW/2+80;
   svgl.setAttribute('width',maxX);svgl.setAttribute('height',mxy+80);
-  renderTree(TREE);
+  TREE.forEach(t=>renderTree(t));
+  const allNodes=flat(TREE);
+  LINKS.forEach(({from,to,conn})=>{
+    const fn=allNodes.find(n=>n.id===from),tn=allNodes.find(n=>n.id===to);
+    if(fn&&tn)drawEdge(fn._x,fn._y+NH/2,tn._x,tn._y-NH/2,conn);
+  });
   setTimeout(()=>{fitAll();setTimeout(()=>document.getElementById('toast').classList.add('gone'),4000);},100);
 }
 window.addEventListener('load',init);
